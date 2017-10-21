@@ -12,6 +12,7 @@ function goodies_enqueue(){
 	wp_enqueue_style( 'bootstrap', get_template_directory_uri(). '/css/bootstrap.min.css', array(), false, 'all' );
 	wp_enqueue_style( 'main', get_template_directory_uri(). '/css/main.css', array(), false, 'all' );
 	wp_enqueue_style( 'Monserat', 'https://fonts.googleapis.com/css?family=Montserrat:300,400', array( ), false, 'all' );
+	wp_enqueue_style( 'fontawesome', get_template_directory_uri().'/assets/css/font-awesome.min.css', array(), false, 'all' );
 	if( is_page() || is_single() ){
 		wp_enqueue_style( 'postslayout', get_template_directory_uri().'/css/post-layout.css', array(), false, 'all' );	
 	}
@@ -24,6 +25,12 @@ function goodies_enqueue(){
 	wp_localize_script( 'ajax-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )));
 }
 add_action( 'wp_enqueue_scripts', 'goodies_enqueue' );
+
+function admin_side_scripts(){
+	wp_enqueue_script( 'admin-js', get_template_directory_uri().'/js/admin-side.js', array( 'jquery' ), false, true );
+}
+
+add_action( 'admin_enqueue_scripts', 'admin_side_scripts' );
 
 /******************************************************************************/
 /*				      Theme Supports                             	                           */
@@ -84,6 +91,9 @@ add_action( 'init', 'post_type_about' );
 function post_type_about() {
 	#By the way adding the image size
 	add_image_size( 'abouts-thumbnail', 495, 280, array('center', 'center') );
+	add_image_size( 'staff-single', 400, 400, array('top', 'center') );
+	add_image_size( 'single-service', 400, 300, array('center', 'center') );
+	add_image_size( 'press-single', 220, 220, array('center', 'center') );
 
 	$labels = array(
 		'name'               => _x( 'Abouts', 'post type general name', 'agency-two' ),
@@ -187,9 +197,9 @@ function reg_sideb(){
 		);
 		register_sidebar(
 			array(
-				'name'           => esc_html__('Event Sidebar', 'agency-one'),
+				'name'           => esc_html__('Event Sidebar', 'agency-two'),
 				'id'             => 'event-sidebar',
-				'description'    => esc_html__('Event post Sidebar Area', 'agency-one'),
+				'description'    => esc_html__('Event post Sidebar Area', 'agency-two'),
 				'before_widget'  => '<div class="widget %2$s">',
 				'after_widget'   => '</div>',
 				'before_title'   => '<h4 class="widget-title">',
@@ -200,56 +210,160 @@ function reg_sideb(){
 }
 add_action('widgets_init','reg_sideb');
 
+/******************************************************************************/
+/*                                                        Custom Post Types  		                                        */
+/******************************************************************************/
+
 function create_posttypes() {
- 
-	register_post_type( 'staff',
-		array(
-			'labels' => array(
-				'name' => __( 'Staff Members' ),
-				'singular_name' => __( 'Staff' )
-			),
-			'public' => true,
-			'has_archive' => true,
-			'rewrite' => array('slug' => 'staff'),
-			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )			
-		)
+
+	$labels = array(
+		'name'               => _x( 'Staff Members', 'post type general name', 'agency-two' ),
+		'singular_name'      => _x( 'Staff', 'post type singular name', 'agency-two' ),
+		'menu_name'          => _x( 'Staff', 'admin menu', 'agency-two' ),
+		'name_admin_bar'     => _x( 'Staff', 'add new on admin bar', 'agency-two' ),
+		'add_new'            => _x( 'Add New', 'staff', 'agency-two' ),
+		'add_new_item'       => __( 'Add New Staff Member', 'agency-two' ),
+		'new_item'           => __( 'New Staff Member', 'agency-two' ),
+		'edit_item'          => __( 'Edit Staff Member', 'agency-two' ),
+		'view_item'          => __( 'View Staff Member', 'agency-two' ),
+		'all_items'          => __( 'All Staff Members', 'agency-two' ),
+		'search_items'       => __( 'Search Staff', 'agency-two' ),
+		'parent_item_colon'  => __( 'Parent Staff:', 'agency-two' ),
+		'not_found'          => __( 'No Staff found.', 'agency-two' ),
+		'not_found_in_trash' => __( 'No Staff found in Trash.', 'agency-two' )
 	);
-	register_post_type( 'services',
-		array(
-			'labels' => array(
-				'name' => __( 'Services' ),
-				'singular_name' => __( 'Service' )
-			),
-			'public' => true,
-			'has_archive' => true,
-			'rewrite' => array('slug' => 'services'),
-			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )			
-		)
-	);	
-	register_post_type( 'media',
-		array(
-			'labels' => array(
-				'name' => __( 'In The Media' ),
-				'singular_name' => __( 'In The Media' )
-			),
-			'public' => true,
-			'has_archive' => true,
-			'rewrite' => array('slug' => 'media'),
-			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )			
-		)		
+	$args = array(
+		'labels'             => $labels,
+		'description'        => __( 'Description.', 'agency-two' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'staff' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => 100,
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )
 	);
-	register_post_type( 'events',
-		array(
-			'labels' => array(
-				'name' => __( 'Events' ),
-				'singular_name' => __( 'Events' )
-			),
-			'public' => true,
-			'has_archive' => true,
-			'rewrite' => array('slug' => 'events'),
-			'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' )
-		)		
-	);		
-	
+	register_post_type( 'staff', $args );
+
+	$labels = array(
+		'name'               => _x( 'Services', 'post type general name', 'agency-two' ),
+		'singular_name'      => _x( 'Service', 'post type singular name', 'agency-two' ),
+		'menu_name'          => _x( 'Services', 'admin menu', 'agency-two' ),
+		'name_admin_bar'     => _x( 'Service', 'add new on admin bar', 'agency-two' ),
+		'add_new'            => _x( 'Add New', 'service', 'agency-two' ),
+		'add_new_item'       => __( 'Add New Service', 'agency-two' ),
+		'new_item'           => __( 'New Service', 'agency-two' ),
+		'edit_item'          => __( 'Edit Service', 'agency-two' ),
+		'view_item'          => __( 'View Service', 'agency-two' ),
+		'all_items'          => __( 'All Services', 'agency-two' ),
+		'search_items'       => __( 'Search Services', 'agency-two' ),
+		'parent_item_colon'  => __( 'Parent Service', 'agency-two' ),
+		'not_found'          => __( 'No Services found.', 'agency-two' ),
+		'not_found_in_trash' => __( 'No Services found in Trash.', 'agency-two' )
+	);
+	$args = array(
+		'labels'             => $labels,
+		'description'        => __( 'Description.', 'agency-two' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'service' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => 100,
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )
+	);
+	register_post_type( 'services', $args );
+
+	$labels = array(
+		'name'               => _x( 'Press', 'post type general name', 'agency-two' ),
+		'singular_name'      => _x( 'Press', 'post type singular name', 'agency-two' ),
+		'menu_name'          => _x( 'Press', 'admin menu', 'agency-two' ),
+		'name_admin_bar'     => _x( 'Press', 'add new on admin bar', 'agency-two' ),
+		'add_new'            => _x( 'Add New', 'press', 'agency-two' ),
+		'add_new_item'       => __( 'Add New Media', 'agency-two' ),
+		'new_item'           => __( 'New Media', 'agency-two' ),
+		'edit_item'          => __( 'Edit Media', 'agency-two' ),
+		'view_item'          => __( 'View Media', 'agency-two' ),
+		'all_items'          => __( 'All Press', 'agency-two' ),
+		'search_items'       => __( 'Search Press', 'agency-two' ),
+		'parent_item_colon'  => __( 'Parent Press', 'agency-two' ),
+		'not_found'          => __( 'No Press found.', 'agency-two' ),
+		'not_found_in_trash' => __( 'No Press found in Trash.', 'agency-two' )
+	);
+	$args = array(
+		'labels'             => $labels,
+		'description'        => __( 'Description.', 'agency-two' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'press' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => 100,
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )
+	);
+	register_post_type( 'press', $args );
+
+	$labels = array(
+		'name'               => _x( 'Events', 'post type general name', 'agency-two' ),
+		'singular_name'      => _x( 'Event', 'post type singular name', 'agency-two' ),
+		'menu_name'          => _x( 'Events', 'admin menu', 'agency-two' ),
+		'name_admin_bar'     => _x( 'Events', 'add new on admin bar', 'agency-two' ),
+		'add_new'            => _x( 'Add New', 'events', 'agency-two' ),
+		'add_new_item'       => __( 'Add New Event', 'agency-two' ),
+		'new_item'           => __( 'New Event', 'agency-two' ),
+		'edit_item'          => __( 'Edit Event', 'agency-two' ),
+		'view_item'          => __( 'View Event', 'agency-two' ),
+		'all_items'          => __( 'All Events', 'agency-two' ),
+		'search_items'       => __( 'Search Event', 'agency-two' ),
+		'parent_item_colon'  => __( 'Parent Event', 'agency-two' ),
+		'not_found'          => __( 'No Event found.', 'agency-two' ),
+		'not_found_in_trash' => __( 'No Event found in Trash.', 'agency-two' )
+	);
+	$args = array(
+		'labels'             => $labels,
+		'description'        => __( 'Description.', 'agency-two' ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => array( 'slug' => 'events' ),
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+		'menu_position'      => 100,
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )
+	);
+	register_post_type( 'events', $args );
+
 }
 add_action( 'init', 'create_posttypes' );
+
+/***********************************************************************************************/
+/* 					Excerpt filter 							   */
+/***********************************************************************************************/
+function af_excerpt_more( $more ) {
+	esc_html__(' ...', 'agency-two');
+}
+add_filter( 'excerpt_more', 'af_excerpt_more' );
+
+function custom_excerpt_length( $length ) {
+	if(is_page_template( 'page-media-page.php' ) || is_archive('press')){
+		return 17;
+	} else {
+		return 55;
+	}
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );

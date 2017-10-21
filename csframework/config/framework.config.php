@@ -137,6 +137,63 @@ $options[]      = array(
 	), // end: fields
 );
 
+$options[]      = array(
+	'name'        => 'team_page',
+	'title'       => 'Team Page',
+	'icon'        => 'fa fa-user',
+	'fields'      => array(
+		array(
+			'id'      => 'team_members_number',
+			'type'    => 'text',
+			'title'   => 'Members to show',
+			'desc' 	=> 'Accepts 3, 6, 9 members to show in the grid on the team page.',
+			'default'	=> 9
+		)
+	), // end: fields
+);
+
+$options[]      = array(
+	'name'        => 'services_page',
+	'title'       => 'Services Page',
+	'icon'        => 'fa fa-cubes',
+	'fields'      => array(
+		array(
+			'id'      => 'services_number',
+			'type'    => 'text',
+			'title'   => 'Services to show',
+			'desc' 	=> 'Accepts 3, 6, 9 services to show in the grid on the services page.',
+			'default'	=> 9
+		),
+		array(
+			'id'      => 'services_title_color',
+			'type'    => 'color_picker',
+			'title'   => 'Services title color',
+			'desc' 	=> 'Default it is white, #fff'
+		),
+		array(
+			'id'      => 'services_background_color',
+			'type'    => 'color_picker',
+			'title'   => 'Services title background color',
+			'desc' 	=> 'The default is almost black, you can choose the opaciti of the color right from here'
+		),
+	), // end: fields
+);
+
+$options[]      = array(
+	'name'        => 'press_page',
+	'title'       => 'Media Page',
+	'icon'        => 'fa fa-cubes',
+	'fields'      => array(
+		array(
+			'id'      => 'press_number',
+			'type'    => 'text',
+			'title'   => 'Media items to show',
+			'desc' 	=> 'Accepts 3, 6, 9 12 items to show in the grid on the media page.',
+			'default'  => 12
+		)
+	), // end: fields
+);
+
 $options[]        = array(
 	'name'        => 'subscribers',
 	'title'       => 'Subscribers',
