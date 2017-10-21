@@ -1,0 +1,60 @@
+#four{
+	margin-top:60px;
+}
+#seen-on{
+    font-style: italic;
+    font-size: 26px;
+}
+
+.staff-title{
+	margin-top: -6px;
+    margin-bottom: 5px;
+    font-size: 17px;
+    color: #d48309;
+}
+
+.single-post .post-meta .post-title {
+    font-size: 24px;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #555;
+    margin-top: 20px;
+    font-weight: 600;
+}
+.single-post .post-meta .post-content {
+    font-size: 14px;
+    line-height: 25px;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #555;
+    margin-top: 1px;
+}
+.single-post .post-thumbnail img {
+    max-width: 100%;
+    height: auto;
+}
+.single-post {
+    padding-bottom: 30px;
+}
+.single-post .row {
+    margin-top: 20px;
+}
+.post-content:before,
+.post-content:after,
+.post-thumbnail:before,
+.post-thumbnail:after
+{
+    content : "";
+    display : table;
+    clear: both;
+}
+@media (min-width: 992px){
+  .single-post .row {
+      height: 360px;
+  }
+  .a-service {
+      height: 220px !important;
+  }
+  .services-bottom{
+	  
+	  height:65px;
+  }  
+}

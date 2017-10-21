@@ -1,0 +1,63 @@
+.event_body{
+	padding: 50px 0;
+}
+
+.event_venue {
+	/*text-align: right;*/
+	display: block;
+	font-size: 22px;
+	margin-top: 14px;
+	line-height: 22px;
+}
+
+.event_thumbnail img{
+	display: block;
+	height: auto;
+	max-width: 100%;
+}
+
+.evet_sumarry {
+	padding: 30px 50px;
+}
+
+.event_date{
+	font-size: 25px;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.event_content{
+	font-size: 17px;
+	margin-top: 20px;
+}
+
+.event_location{
+	font-size: 25px;
+	font-family: 'Montserrat', sans-serif;
+	margin: 50px 0 20px;
+}
+
+.map {
+	height: 400px;
+}
+
+.event_has_sidebar{
+	margin-top: 50px;
+}
+
+@media(max-width: 992px){
+	.event_thumbnail img{
+		margin: 0 auto;
+	}
+}
+
+@media(max-width: 768px){
+	.event_location{
+		    margin: 0px 0 20px;
+	}
+}
+
+@media(max-width: 425px){
+	.evet_sumarry{
+		padding: 30px 0;
+	}
+}

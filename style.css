@@ -1,0 +1,225 @@
+/*
+Theme Name: Agency Two
+Author: Agency Themes
+Description: Agency themes
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: agency-two
+*/
+
+#col-left{
+	padding: 10% 3% 0 5%;
+}
+
+#col-right{
+	padding: 5%;
+}
+
+.pull-right{	
+	text-align:left;
+	margin-left:-100px;
+	width:71% !important;
+	margin-bottom: 15px;
+	margin-top:15px;
+}
+
+.pull-right span{
+	font-size:28px;
+	color:#fff;
+}	
+
+.pull-right p{
+	padding: 15px;font-size: 18px;color: #fff;line-height: 25px;
+}
+
+#main-headline{
+	font-size: 45px;
+	font-family: minion-pro;
+	margin-top: 25px;
+	font-weight: 500;
+	background-color: rgba(214, 195, 195, 0.5);
+	padding: 25px;
+	text-align: center;
+}
+
+#sub-headline{
+	font-size:17px;line-height: 18px;
+}
+
+.call-to-action{
+	font-size: 28px;
+	font-weight: 500;
+}
+
+.sub-call-to-action{
+	font-size:24px;
+}
+
+.abouts{
+	padding-top:25px;	
+	padding-bottom:35px;
+}
+
+.btn{
+	max-width:95%;
+}
+
+#secondary-header a,
+.terms_conditions a{
+	color: #fff;
+	text-decoration: none;
+}
+
+#secondary-header a:hover,
+.terms_conditions a:hover{
+	text-decoration: underline;
+	color: #fff;
+}
+
+
+@media(max-width: 992px){
+	.abouts{
+		border-top: solid 1px lightgrey;
+	}
+}
+
+
+/*********************************************************************/
+/* 							Scroll Pop-up styles 					 */
+/*********************************************************************/
+
+#popup {
+	width: 100%;
+	height: 180px;
+	background-color: #EAEAEA;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	display: none;
+}
+
+#popup>img {
+	position: absolute;
+	right: 2px;
+	top: -20px;
+	cursor: pointer;
+}
+
+#popup div {
+	width: 1400px;
+	height: inherit;
+	margin: 0 auto;
+	position: relative;
+}
+
+#popup div img {
+	position: absolute;
+	bottom: -10px;
+	left: -6px;
+}
+
+#popup div div {
+	margin-left: 220px;
+	width: 680px;
+	height: inherit;
+	padding-top: 30px;
+	float: left;
+}
+
+#popup div div span {
+	color: #55708f;
+	font-weight: 300;
+	font-size: 45px;
+}
+
+#popup div div p {
+	font-size: 18px;
+	margin-top: 0px;
+	color: #444;
+}
+
+#popup div form {
+	display: inline-block;
+	width: 300px;
+	margin-left: 50px;
+	margin-top: 15px;
+}
+
+#popup div form input {
+	width: 100%;
+	height: 32px;
+	border-radius: 4px;
+	margin-top: 6px;
+	border: 0;
+	border: none;
+	font-size: 16px;
+	text-align: center;
+}
+
+#popup div form input[type="submit"] {
+	background-color: #d58508;
+	color: #FFFFFF;
+	height: 40px;
+}
+
+#popup div form p {
+	font-size: 18px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	color: #444;
+	text-align: center;
+	display: none;
+}
+
+@media screen and (max-width: 950px) {
+	#popup div div {
+		float: none;
+	}
+	#popup div div {
+		display: none;
+	}
+	#popup div form {
+		width: 70%;
+		position: absolute;
+		left: 15%;
+	}
+	#popup div form p {
+		display: block;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	#popup div form {
+		width: 90%;
+		left: 5%;
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	#popup div div span {
+		font-size: 40px;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	#popup div img {
+		visibility: hidden;
+	}
+	#popup div div {
+		margin-left: 25px;
+		width: auto;
+		max-width: 60%;
+	}
+	#popup div form {
+		float: right;
+		margin-right: 30px;
+		margin-left: 0px;
+	}
+}
+
+@media screen and (max-width: 1400px) {
+	#popup div {
+		width: 100%;
+	}
+}
