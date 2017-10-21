@@ -206,6 +206,28 @@ function reg_sideb(){
 				'after_title'    => '</h4>'
 			)
 		);
+		register_sidebar(
+			array(
+				'name'           => esc_html__('Staff Sidebar', 'agency-two'),
+				'id'             => 'staff-sidebar',
+				'description'    => esc_html__('Staff post Sidebar Area', 'agency-two'),
+				'before_widget'  => '<div class="widget %2$s">',
+				'after_widget'   => '</div>',
+				'before_title'   => '<h4 class="widget-title">',
+				'after_title'    => '</h4>'
+			)
+		);
+		register_sidebar(
+			array(
+				'name'           => esc_html__('Services Sidebar', 'agency-two'),
+				'id'             => 'services-sidebar',
+				'description'    => esc_html__('Services post Sidebar Area', 'agency-two'),
+				'before_widget'  => '<div class="widget %2$s">',
+				'after_widget'   => '</div>',
+				'before_title'   => '<h4 class="widget-title">',
+				'after_title'    => '</h4>'
+			)
+		);
 	}
 }
 add_action('widgets_init','reg_sideb');
@@ -242,7 +264,7 @@ function create_posttypes() {
 		'query_var'          => true,
 		'rewrite'            => array( 'slug' => 'staff' ),
 		'capability_type'    => 'post',
-		'has_archive'        => true,
+		'has_archive'        => false,
 		'hierarchical'       => false,
 		'menu_position'      => 100,
 		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail'  )
