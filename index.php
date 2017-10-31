@@ -1,8 +1,18 @@
 <?php get_header(); ?>
 		<div class="row secondRow" style="">
 			<div class="col-sm-6" id="col-left">
-				<p id="main-headline" style="color:#fff;">Our goal is to help you plan for a successful retirement.
-				We want to see you enter retirement on your terms without financial worry.</p>
+				<p id="main-headline" style="color:#594343; <?php 
+					if(cs_get_option('homepage_section_one_bg')) echo ' background: '. cs_get_option('homepage_section_one_bg'). '; ';
+					if(cs_get_option('homepage_section_one_txt_color')) echo ' color: '. cs_get_option('homepage_section_one_txt_color'). ';';
+
+				 ?>">
+					<?php if(cs_get_option('homepage_section_one')) :
+						echo cs_get_option('homepage_section_one');
+					else : ?>
+						Our goal is to help you plan for a successful retirement.
+						We want to see you enter retirement on your terms without financial worry.
+					<?php endif; ?>
+				</p>
 			</div>
 			<div class="col-sm-6" id="col-right" style="">
 				<div class="row">

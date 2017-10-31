@@ -31,24 +31,26 @@ get_header();
 						Home » <?php the_title(); ?>
 					</div>
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-<?php echo is_active_sidebar( 'contact-page-sidebar' ) ? 8 : 12; ?>">
 							<div id="subPageLeft" class="cushycms">
 								<h1><?php the_title(); ?></h1>
 								<?php the_content();
-								if (is_active_sidebar( 'contact-form-sidebar' )):
-									dynamic_sidebar('contact-form-sidebar');
-								endif; ?>
+								if (is_active_sidebar( 'contact-form-sidebar' )): ?>
+									<div class="sidebar-bellow-content">
+										<?php dynamic_sidebar('contact-form-sidebar'); ?>
+									</div>
+								<?php endif; ?>
 							</div>
 						</div>
-						<div class="col-md-4">
-							<div id="subPageRight">
-								<div id="offerSubPage">
-									<?php if (is_active_sidebar( 'contact-page-sidebar' )):
-										dynamic_sidebar('contact-page-sidebar');
-									endif; ?>
+						<?php if (is_active_sidebar( 'contact-page-sidebar' )): ?>
+							<div class="col-md-4">
+								<div id="subPageRight">
+									<div id="offerSubPage">
+											<?php dynamic_sidebar('contact-page-sidebar'); ?>
+									</div>
 								</div>
 							</div>
-						</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

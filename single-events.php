@@ -2,7 +2,7 @@
 	if(have_posts()) :
 		while(have_posts()) : the_post();  
 			$event_meta = get_post_meta(get_the_ID(), '_events_options', true); ?>
-			<div id="subpageImageCover" style="background-image:url(<?php echo has_post_thumbnail() ? get_the_post_thumbnail_url() : get_template_directory_uri().'/assets/images/page-main.jpg' ; ?>)">
+			<div id="subpageImageCover" style="background-image:url(<?php echo @$event_meta['event_header_bg'] ? @$event_meta['event_header_bg'] : get_template_directory_uri().'/assets/images/page-main.jpg' ; ?>)">
 				<div id="subPage">
 					<div class="container">
 						<div class="subPageHeader">
@@ -19,7 +19,7 @@
 			<div id="subPageCover">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-<?php echo is_active_sidebar( 'event-sidebar' ) ? 8 : 12; ?>">
 							<section class="event_body">
 								<div class="row">
 									<div class="col-md-3">
@@ -83,15 +83,15 @@
 								</div>	
 							</section>
 						</div>
-						<div class="col-md-4">
-							<div id="subPageRight" class="event_has_sidebar">
-								<div id="offerSubPage">
-									<?php if (is_active_sidebar( 'event-sidebar' )):
-										dynamic_sidebar('event-sidebar');
-									endif;  ?>
+						<?php if (is_active_sidebar( 'event-sidebar' )): ?>
+							<div class="col-md-4">
+								<div id="subPageRight" class="event_has_sidebar">
+									<div id="offerSubPage">
+											<?php dynamic_sidebar('event-sidebar'); ?>
+									</div>
 								</div>
 							</div>
-						</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

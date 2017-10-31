@@ -61,6 +61,24 @@ $options[]        = array(
 	'icon'        => 'fa fa-home',
 	'fields'      => array(
 		array(
+			'id'    => 'homepage_section_one',
+			'type'  => 'textarea',
+			'title' => 'Home Page Section One Text',
+			'desc' => 'Changes the text "Our goal is to ..."'
+		),
+		array(
+			'id'      => 'homepage_section_one_bg',
+			'type'    => 'color_picker',
+			'title'   => 'Section one text background',
+			'desc' 	=> 'The background for the section described in the above setting'
+		),
+		array(
+			'id'      => 'homepage_section_one_txt_color',
+			'type'    => 'color_picker',
+			'title'   => 'Section one text color',
+			'desc' 	=> 'The background for the section described in the above setting'
+		),
+		array(
 			'id'    => 'default_abouts',
 			'type'  => 'switcher',
 			'title' => 'Hide Default Abouts?',

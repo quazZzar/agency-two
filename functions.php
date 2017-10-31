@@ -164,7 +164,7 @@ function reg_sideb(){
 		);
 		register_sidebar(
 			array(
-				'name'           => esc_html__('Contact Form Sidebar', 'agency-two'),
+				'name'           => esc_html__('Contact page bellow content', 'agency-two'),
 				'id'             => 'contact-form-sidebar',
 				'description'    => esc_html__('This sidebar holds the main contact form of the website', 'agency-two'),
 				'before_widget'  => '<div class="widget %2$s">',

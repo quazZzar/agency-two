@@ -88,6 +88,11 @@ $options[]    = array(
 			'icon'  => 'fa fa-calendar',
 			'fields' => array(
 				array(
+					'id'    => 'event_header_bg',
+					'type'  => 'upload',
+					'title' => 'Event Header Background',
+				),
+				array(
 					'id'    => 'event_datetime',
 					'type'  => 'text',
 					'title' => 'Event Date',
